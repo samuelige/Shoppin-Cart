@@ -14,24 +14,6 @@ function App() {
 
     setSort({ sort: storeSortValue });
 
-    // const sortedProduts = (state) {
-    //   state.products
-    //     .slice()
-    //     .sort((a, b) =>
-    //       storeSortValue === "lowest"
-    //         ? a.price < b.price
-    //           ? 1
-    //           : -1
-    //         : storeSortValue === "hightest"
-    //         ? a.price > b.price
-    //           ? 1
-    //           : -1
-    //         : a._id > b._id
-    //         ? 1
-    //         : -1
-    //     );
-    // });
-
     const sortedProducts = data.products
       .slice()
       .sort((a, b) =>
