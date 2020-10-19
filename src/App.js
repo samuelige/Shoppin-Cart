@@ -11,7 +11,8 @@ function App() {
   const [sort, setSort] = useState("");
 
   const createOrder = (order) => {
-    alert('Need to save' + order.name)
+    console.log(order)
+    alert('Need to save oder for ' + order.name)
   }
   
   const removeFromCart =(product) => {
