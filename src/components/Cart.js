@@ -1,32 +1,30 @@
 import React, { useState } from 'react'
 import formatCurrency from '../Util';
-import Form from './Form';
-
-// import { Fragment } from 'react';
 
 function Cart(props) {
     const {cartItems} = props;
 
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
+    const [state, setState] = useState({
+        email: '',
+        name: '',
+        address: ''
+    })
     const [showCheckout, setShowCheckout] = useState(false);
 
     const handleInput = (e) => {
-        setEmail({[e.target.email]: e.target.value});
-        setName({[e.target.name]: e.target.value});
-        setAddress({[e.target.address]: e.target.value});
+        setState({...state, [e.target.name]: e.target.value});
     }
 
     const createOrder =(e) => {
        e.preventDefault();
        const order = {
-           email: {email},
-           name: {name},
-           address: {address},
-           cartItems: {cartItems}
-        }
+           name: state.name,
+           email: state.email,
+           address: state.address,
+           cartItems: state.cartItems,
+        };
         props.createOrder(order)
+        console.log(order)
     }
     return (
             <div>
@@ -55,7 +53,7 @@ function Cart(props) {
                         </ul>
                     </div>
                     {cartItems.length !== 0 && (
-                        <>
+                        <div>
                             <div className="cart">
                                 <div className="total">
                                     <div>
@@ -67,11 +65,29 @@ function Cart(props) {
                             </div>
                             {showCheckout && (
                                 <div className="cart">
-                                <form onSubmit={createOrder}></form>
-                                    <Form />
+                                    <form onSubmit={createOrder}>
+                                    <ul className="form-container">
+                                        <li>
+                                            <label htmlFor="">Email</label>
+                                            <input name='email' type="email" onChange={handleInput} required/>
+                                        </li>
+                                        <li>
+                                            <label htmlFor="">Name</label>
+                                            <input name='name' type="text" onChange={handleInput} required/>
+                                        </li>
+                                        <li>
+                                            <label htmlFor="">Address</label>
+                                            <input name='address' type="text" onChange={handleInput} required/>
+                                        </li>
+                                        <li>
+                                            <button className='button primary' type='submit'>Checkout</button>
+                                        </li>
+                                    </ul>
+                                    </form>
+                                    
                                 </div>
                             )}
-                        </>
+                        </div>
                     )}
                     
                 </div>
